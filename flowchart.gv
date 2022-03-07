@@ -1,0 +1,67 @@
+digraph G {
+  node [fontname = "helvetica"];
+  edge [fontname = "helvetica"];
+
+  fontsize="10"
+
+  start [
+    label = "Start\n";
+    shape = oval;
+  ];
+  input [
+    label = "\ninsert URL\nhttp://ranjan.com\n\n";
+    shape = rect;
+  ];
+  findip [
+    label = "Resolve\n go to the dns server for IP Address behalf of domain";
+    shape = diamond;
+  ];
+  p1 [
+    label = "Is\n there a problem\n with request ?";
+    shape = diamond;
+  ];
+  p2 [
+    label = "Is\n there a problem\n server side ?";
+    shape = diamond;
+  ];
+  p3 [
+    label = "Is\n Implement a\n web server?";
+    shape = diamond;
+  ];
+  r1 [
+    label = "4XX\n Response";
+    shape = oval;
+  ];
+  r2 [
+    label = "5XX\n Response";
+    shape = oval;
+  ];
+  r3 [
+    label = "1XX\n Response";
+    shape = oval;
+  ];
+  r4 [
+    label = "2XX/3XX\n Response";
+    shape = oval;
+  ];
+
+
+  start -> input;
+  input -> findip;
+  findip -> p1;
+  p1 -> p2[ label = "No" ];
+  p1 -> r1[ label = "Yes" ];
+  p2 -> p3[ label = "No" ];
+  p2 -> r2[ label = "Yes" ];
+  p3 -> r3[ label = "Yes" ];
+  p3 -> r4[ label = "No" ];
+  {
+    rank=same;
+  p1; p2; p3;
+  }
+  {
+    rank=same;
+    r1; r2; r3; r4;
+  }
+
+}
